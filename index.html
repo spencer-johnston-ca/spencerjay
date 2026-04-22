@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spencer Jay | Folk & Roots | Hamilton</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0e1520;
+      --navy-mid: #131c2b;
+      --navy-light: #1a2640;
+      --khaki: #b5a48a;
+      --khaki-light: #cfc0a5;
+      --khaki-dim: #7a6e5f;
+      --white: #f0ece4;
+      --rule: rgba(181, 164, 138, 0.25);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--khaki-light);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3rem;
+      background: linear-gradient(to bottom, rgba(14,21,32,0.95) 0%, transparent 100%);
+      transition: background 0.4s;
+    }
+
+    nav.scrolled {
+      background: rgba(14,21,32,0.97);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-wordmark {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      letter-spacing: 0.3em;
+      color: var(--khaki);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--khaki-dim);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--khaki-light); }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: flex-end;
+      padding: 0 3rem 5rem;
+      overflow: hidden;
+    }
+
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      background-image: url('IMG_0499.jpeg');
+      background-size: cover;
+      background-position: center 20%;
+      filter: brightness(0.45) saturate(0.8);
+      transform: scale(1.03);
+      animation: slowzoom 20s ease-out forwards;
+    }
+
+    @keyframes slowzoom {
+      from { transform: scale(1.06); }
+      to   { transform: scale(1.0); }
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(14,21,32,1) 0%,
+        rgba(14,21,32,0.5) 40%,
+        rgba(14,21,32,0.1) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      animation: fadeup 1.4s ease-out both;
+    }
+
+    @keyframes fadeup {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-name {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      color: var(--khaki);
+      line-height: 0.9;
+      display: block;
+    }
+
+    .hero-name span {
+      display: block;
+      font-size: clamp(2rem, 5.5vw, 4.5rem);
+      letter-spacing: 0.35em;
+      color: var(--khaki-dim);
+      padding-top: 0.3em;
+      position: relative;
+    }
+
+    .hero-name span::before,
+    .hero-name span::after {
+      content: '—';
+      margin: 0 0.5em;
+      opacity: 0.5;
+    }
+
+    .hero-tagline {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--khaki-dim);
+      margin-top: 1.5rem;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      margin-top: 2rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--khaki);
+      text-decoration: none;
+      border: 1px solid var(--rule);
+      padding: 0.8em 2em;
+      transition: all 0.3s;
+    }
+
+    .hero-cta:hover {
+      border-color: var(--khaki);
+      background: rgba(181,164,138,0.08);
+    }
+
+    /* ── SECTION SHARED ── */
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 6rem 3rem;
+    }
+
+    .section-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--khaki-dim);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+      max-width: 80px;
+    }
+
+    .section-rule {
+      width: 100%;
+      height: 1px;
+      background: var(--rule);
+      margin: 0 auto;
+    }
+
+    /* ── ABOUT ── */
+    #about p {
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      line-height: 1.9;
+      color: var(--khaki-light);
+      font-weight: 300;
+    }
+
+    #about p + p { margin-top: 1.5rem; }
+
+    #about em {
+      font-style: italic;
+      color: var(--khaki);
+    }
+
+    /* ── LISTEN ── */
+    #listen .listen-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .listen-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--khaki-dim);
+      letter-spacing: 0.05em;
+    }
+
+    .soundcloud-embed {
+      width: 100%;
+      border-radius: 2px;
+      overflow: hidden;
+      border: 1px solid var(--rule);
+    }
+
+    .soundcloud-placeholder {
+      background: var(--navy-light);
+      border: 1px solid var(--rule);
+      padding: 3rem 2rem;
+      text-align: center;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--khaki-dim);
+    }
+
+    /* ── SETLIST ── */
+    #setlist .setlist-intro {
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--khaki-dim);
+      margin-bottom: 2.5rem;
+    }
+
+    .setlist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 0;
+    }
+
+    .setlist-item {
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .setlist-song {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--khaki-light);
+      letter-spacing: 0.02em;
+    }
+
+    .setlist-artist {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--khaki-dim);
+    }
+
+    /* ── SHOWS ── */
+    #shows .shows-empty {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--khaki-dim);
+      padding: 2rem 0;
+    }
+
+    .show-item {
+      display: grid;
+      grid-template-columns: 100px 1fr auto;
+      align-items: center;
+      gap: 2rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .show-date {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      color: var(--khaki);
+      line-height: 1.4;
+    }
+
+    .show-date span {
+      display: block;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--khaki-dim);
+    }
+
+    .show-venue { font-size: 1rem; color: var(--khaki-light); }
+    .show-location {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--khaki-dim);
+      margin-top: 0.2rem;
+    }
+
+    /* ── CONTACT ── */
+    #contact .contact-intro {
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--khaki-dim);
+      margin-bottom: 3rem;
+      max-width: 560px;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      max-width: 560px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--khaki-dim);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: var(--navy-light);
+      border: 1px solid var(--rule);
+      color: var(--khaki-light);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 300;
+      padding: 0.8rem 1rem;
+      outline: none;
+      transition: border-color 0.3s;
+      -webkit-appearance: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--khaki-dim);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 140px; }
+
+    .form-group select option { background: var(--navy-mid); }
+
+    .btn-submit {
+      align-self: flex-start;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--khaki);
+      background: transparent;
+      border: 1px solid var(--rule);
+      padding: 0.9em 2.5em;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-submit:hover {
+      border-color: var(--khaki);
+      background: rgba(181,164,138,0.08);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .footer-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      color: var(--khaki-dim);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--khaki-dim);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover { color: var(--khaki); }
+
+    .footer-copy {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      color: var(--khaki-dim);
+      opacity: 0.5;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 680px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      #hero { padding: 0 1.5rem 4rem; }
+      section { padding: 4rem 1.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .show-item { grid-template-columns: 80px 1fr; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+      .setlist-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── SCROLL FADE-IN ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#hero" class="nav-wordmark">Spencer Jay</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#listen">Listen</a></li>
+      <li><a href="#setlist">Set List</a></li>
+      <li><a href="#shows">Shows</a></li>
+      <li><a href="#contact">Booking</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div id="hero">
+    <div class="hero-img"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-name">
+        SPENCER
+        <span>JAY</span>
+      </div>
+      <p class="hero-tagline">Folk &amp; Roots &nbsp;·&nbsp; Hamilton, ON</p>
+      <a href="#about" class="hero-cta">Discover</a>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">About</div>
+    <div class="reveal">
+      <p>
+        Spencer Jay is a folk and roots musician based in Hamilton, Ontario. The road that brought him here winds through London, Brampton, and more than a decade in Winnipeg. He has been singing for as long as he can remember, drawn first to the old upright organ in his grandparents' home, then to a guitar at eleven years old, and eventually to stages across the country.
+      </p>
+      <p>
+        Before settling into the intimacy of solo acoustic performance, Spencer spent his formative years playing in bands, sharing bills with the likes of <em>Cancer Bats</em>, <em>Holly Springs Disaster</em>, and <em>Lifestory: Monologue</em>. That background, steeped in post-hardcore urgency and emotional directness, never fully left him. It surfaces now in the weight he brings to a quiet song, the tension held inside a gentle chord.
+      </p>
+      <p>
+        His sound sits at the intersection of folk, Americana, and roots, shaped by the songwriting of Jason Isbell and Gregory Alan Isakov, the raw emotional honesty of Glen Hansard, and the timeless feel of Eric Clapton's best acoustic work. Spencer makes music because it keeps him grounded. <em>No matter how unsettled the day, an hour with his guitar brings him back to himself.</em> That search for peace, and the willingness to be honest about needing it, is at the heart of everything he plays.
+      </p>
+    </div>
+  </section>
+
+  <div class="section-rule"></div>
+
+  <!-- LISTEN -->
+  <section id="listen">
+    <div class="section-label">Listen</div>
+    <div class="listen-inner reveal">
+      <p class="listen-label">Recorded live — voice, acoustic guitar, mandolin, violin &amp; layered harmonies.</p>
+      <div class="soundcloud-embed">
+        <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A54126197&color=%23b5a48a&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-rule"></div>
+
+  <!-- SET LIST -->
+  <section id="setlist">
+    <div class="section-label">Set List</div>
+    <p class="setlist-intro reveal">A selection of what you'll hear on any given night.</p>
+    <div class="setlist-grid reveal">
+
+      <div class="setlist-item">
+        <span class="setlist-song">If I Go, I'm Goin'</span>
+        <span class="setlist-artist">Gregory Alan Isakov</span>
+      </div>
+      <div class="setlist-item">
+        <span class="setlist-song">Cover Me Up</span>
+        <span class="setlist-artist">Jason Isbell</span>
+      </div>
+      <div class="setlist-item">
+        <span class="setlist-song">You're Still The One</span>
+        <span class="setlist-artist">Shania Twain</span>
+      </div>
+      <div class="setlist-item">
+        <span class="setlist-song">Riptide</span>
+        <span class="setlist-artist">Vance Joy</span>
+      </div>
+      <div class="setlist-item">
+        <span class="setlist-song">Something In The Orange</span>
+        <span class="setlist-artist">Zach Bryan</span>
+      </div>
+      <div class="setlist-item">
+        <span class="setlist-song">Wagon Wheel</span>
+        <span class="setlist-artist">Darius Rucker / Old Crow Medicine Show</span>
+      </div>
+      <div class="setlist-item">
+        <span class="setlist-song">Ho Hey</span>
+        <span class="setlist-artist">The Lumineers</span>
+      </div>
+      <div class="setlist-item">
+        <span class="setlist-song">Whiskey Glasses</span>
+        <span class="setlist-artist">Morgan Wallen</span>
+      </div>
+      <div class="setlist-item">
+        <span class="setlist-song">3 AM</span>
+        <span class="setlist-artist">Matchbox Twenty</span>
+      </div>
+      <div class="setlist-item">
+        <span class="setlist-song">Say It To Me Now</span>
+        <span class="setlist-artist">Glen Hansard</span>
+      </div>
+
+    </div>
+    <p class="setlist-intro reveal" style="margin-top:2rem; font-size:0.85rem;">
+      Full set list available on request — <a href="#contact" style="color:var(--khaki); text-decoration:none;">get in touch.</a>
+    </p>
+  </section>
+
+  <div class="section-rule"></div>
+
+  <!-- SHOWS -->
+  <section id="shows">
+    <div class="section-label">Shows</div>
+    <div class="reveal">
+      <p class="shows-empty">More dates coming soon. Follow along for updates.</p>
+      <!-- When you have gigs, replace the paragraph above with show-item divs like this:
+      <div class="show-item">
+        <div class="show-date">
+          JUN 14
+          <span>2025</span>
+        </div>
+        <div>
+          <div class="show-venue">The Pheasant Plucker</div>
+          <div class="show-location">Hamilton, ON</div>
+        </div>
+      </div>
+      -->
+    </div>
+  </section>
+
+  <div class="section-rule"></div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">Booking</div>
+    <p class="contact-intro reveal">
+      Available for bars, breweries, wineries, and private events across Hamilton and Southern Ontario.
+    </p>
+    <!-- Replace action URL with your Formspree endpoint: https://formspree.io -->
+    <form class="contact-form reveal" action="https://formspree.io/f/xpqkyjee" method="POST">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inquiry">Inquiry Type</label>
+        <select id="inquiry" name="inquiry">
+          <option value="">— Select —</option>
+          <option value="booking">Venue Booking</option>
+          <option value="private">Private Event</option>
+          <option value="general">General</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      <button type="submit" class="btn-submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-name">Spencer Jay</div>
+    <ul class="footer-links">
+      <li><a href="https://soundcloud.com/spencerjaymusic" target="_blank" rel="noopener">SoundCloud</a></li>
+      <li><a href="https://instagram.com/spencerjaymusic" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="https://www.tiktok.com/@spencerjaymusic" target="_blank" rel="noopener">TikTok</a></li>
+      <li><a href="https://www.youtube.com/@SpencerJayMusic" target="_blank" rel="noopener">YouTube</a></li>
+    </ul>
+    <div class="footer-copy">&copy; 2026 Spencer Jay</div>
+  </footer>
+
+  <script>
+    // Nav scroll class
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
